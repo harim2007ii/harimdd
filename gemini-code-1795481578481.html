@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>노하림 (Noh Harim) | 행정학도 & 디지털 크리에이터</title>
+  
+  <!-- Fonts: Pretendard & Playfair Display -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FDFCFA',
+            sand: '#F5F2EB',
+            forest: '#132620',
+            forestLight: '#1E3A31',
+            blush: '#D45D83',
+            blushSoft: '#FCEEF3',
+            ink: '#1C1C1C',
+            muted: '#66635E',
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+          },
+          boxShadow: {
+            'editorial': '0 10px 30px -10px rgba(19, 38, 32, 0.08)',
+            'card': '0 4px 20px -2px rgba(19, 38, 32, 0.05)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FDFCFA;
+      color: #1C1C1C;
+      font-family: 'Pretendard', sans-serif;
+      background-image: radial-gradient(#132620 0.65px, transparent 0.65px);
+      background-size: 26px 26px;
+      background-position: 0 0;
+    }
+
+    .bg-overlay {
+      background: linear-gradient(180deg, rgba(253, 252, 250, 0.94) 0%, rgba(253, 252, 250, 0.97) 50%, rgba(253, 252, 250, 0.95) 100%);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FDFCFA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6D1C7;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #132620;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-blushSoft selection:text-blush">
+  <div class="bg-overlay min-h-screen flex flex-col">
+
+    <!-- 1. Navigation Bar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-cream/85 border-b border-forest/10">
+      <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#" class="font-serif text-xl font-bold tracking-wider text-forest flex items-center gap-1.5">
+          HARIM<span class="w-1.5 h-1.5 rounded-full bg-blush inline-block"></span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
+          <a href="#about" class="hover:text-forest transition-colors">About</a>
+          <a href="#interests" class="hover:text-forest transition-colors">Interests</a>
+          <a href="#projects" class="hover:text-forest transition-colors">Projects</a>
+          <a href="#contact" class="px-4 py-1.5 rounded-full bg-forest text-cream hover:bg-forestLight transition-colors">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" aria-label="메뉴 열기" class="md:hidden p-2 text-forest hover:bg-sand rounded-lg transition-colors">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-b border-forest/10 bg-cream px-6 py-4 space-y-3">
+        <a href="#about" class="mobile-link block py-1.5 text-sm font-medium text-ink hover:text-blush">About</a>
+        <a href="#interests" class="mobile-link block py-1.5 text-sm font-medium text-ink hover:text-blush">Interests</a>
+        <a href="#projects" class="mobile-link block py-1.5 text-sm font-medium text-ink hover:text-blush">Projects</a>
+        <a href="#contact" class="mobile-link block py-1.5 text-sm font-medium text-blush font-semibold">Contact & 방명록</a>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      <!-- 2. Hero Section -->
+      <section class="max-w-5xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+        <div class="fade-up max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sand border border-forest/10 text-xs font-medium text-forest mb-7">
+            <span class="w-2 h-2 rounded-full bg-blush animate-pulse"></span>
+            Jeonbuk National Univ. · Public Administration ’26
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-[54px] font-bold tracking-tight text-forest leading-[1.22] mb-6">
+            공공의 가치를 설계하고,<br />
+            <span class="text-blush">디지털 콘텐츠</span>로<br class="sm:hidden" /> 이야기를 잇는<br />
+            행정학도 <span class="underline decoration-blush/40 decoration-4 underline-offset-8">노하림</span>입니다.
+          </h1>
+
+          <p class="text-base sm:text-lg text-muted leading-relaxed max-w-xl mb-10">
+            전북대학교 행정학과 26학번으로 배움의 폭을 넓히고 있습니다. 
+            생성형 AI와 디지털 도구를 활용해 아이디어를 구조화하고, 사람들의 마음을 움직이는 따뜻한 콘텐츠와 기획을 만듭니다.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3.5">
+            <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-forest text-cream text-sm font-semibold hover:bg-forestLight transition-all shadow-editorial">
+              프로젝트 살펴보기
+              <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white border border-forest/15 text-forest text-sm font-semibold hover:bg-sand transition-all">
+              인사 건네기
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. About Me Section -->
+      <section id="about" class="py-20 border-t border-forest/10 bg-sand/40">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="fade-up grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+            
+            <!-- Left Visual Card -->
+            <div class="md:col-span-5">
+              <div class="relative bg-forest text-cream rounded-3xl p-8 shadow-editorial overflow-hidden">
+                <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-blush/20 blur-xl"></div>
+                <div class="flex items-center justify-between mb-12">
+                  <span class="font-serif italic text-sm text-cream/70">Archive No. 01</span>
+                  <span class="px-2.5 py-0.5 text-[11px] rounded-full border border-cream/20 text-cream/80">2026 EDITION</span>
+                </div>
+                
+                <div class="mb-8">
+                  <p class="font-serif text-3xl font-bold tracking-tight mb-1">Noh Harim</p>
+                  <p class="text-sm text-cream/75">노하림 · 2007. 03. 15</p>
+                </div>
+
+                <div class="space-y-2.5 pt-6 border-t border-cream/15 text-xs text-cream/85">
+                  <div class="flex justify-between">
+                    <span class="text-cream/60">소속</span>
+                    <span class="font-medium">전북대학교 행정학과 26학번</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-cream/60">거점</span>
+                    <span class="font-medium">전북 전주시 (Jeonju)</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-cream/60">관심 분야</span>
+                    <span class="font-medium">공공행정 · AI 기획 · 콘텐츠</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Narrative & Keywords -->
+            <div class="md:col-span-7 space-y-6">
+              <div>
+                <p class="font-serif italic text-blush text-sm font-medium mb-1">About Me</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-forest tracking-tight">
+                  논리적인 시각 위에 감각적인 기록을 더합니다
+                </h2>
+              </div>
+
+              <p class="text-muted leading-relaxed text-[15px] sm:text-base">
+                행정학은 사회의 문제를 정의하고 최적의 대안을 설계하는 학문입니다. 저는 전공 수업을 통해 기른 체계적인 사고력에 AI 도구 활용 능력과 디지털 콘텐츠 제작 감각을 결합하고 있습니다.
+              </p>
+              <p class="text-muted leading-relaxed text-[15px] sm:text-base">
+                강의 내용을 AI 노트로 구조화하는 작은 습관부터 학과 행사 영상 제작, 교육용 웹 애플리케이션 기획까지—일상의 호기심을 실행으로 옮기며 한 걸음씩 성장하는 중입니다.
+              </p>
+
+              <!-- Keyword Badges -->
+              <div class="pt-2 flex flex-wrap gap-2">
+                <span class="px-3.5 py-1.5 rounded-full bg-white border border-forest/10 text-xs font-semibold text-forest shadow-sm">#행정학도</span>
+                <span class="px-3.5 py-1.5 rounded-full bg-blushSoft border border-blush/20 text-xs font-semibold text-blush shadow-sm">#AI활용러</span>
+                <span class="px-3.5 py-1.5 rounded-full bg-white border border-forest/10 text-xs font-semibold text-forest shadow-sm">#디지털콘텐츠제작</span>
+                <span class="px-3.5 py-1.5 rounded-full bg-white border border-forest/10 text-xs font-semibold text-forest shadow-sm">#기록과성장</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Interests & Skills -->
+      <section id="interests" class="py-24 border-t border-forest/10">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="fade-up mb-12">
+            <p class="font-serif italic text-blush text-sm font-medium mb-1">Interests & Capabilities</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-forest tracking-tight">주요 관심사 및 역량</h2>
+          </div>
+
+          <div class="fade-up grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <!-- Card 1 -->
+            <div class="group bg-white p-7 rounded-2xl border border-forest/10 shadow-card hover:border-forest/30 transition-all">
+              <div class="w-11 h-11 rounded-xl bg-sand flex items-center justify-center text-forest mb-5 group-hover:bg-forest group-hover:text-cream transition-colors">
+                <i data-lucide="landmark" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-lg font-bold text-forest mb-2">공공행정 & 정책 탐구</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                사회 현상을 다각도로 분석하고 공공의 이익을 높이는 합리적인 의사결정과 행정 시스템을 탐구합니다.
+              </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="group bg-white p-7 rounded-2xl border border-forest/10 shadow-card hover:border-blush/40 transition-all">
+              <div class="w-11 h-11 rounded-xl bg-blushSoft flex items-center justify-center text-blush mb-5 group-hover:bg-blush group-hover:text-white transition-colors">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-lg font-bold text-forest mb-2">생성형 AI 워크플로우</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                Gemini, NotebookLM, Lilys AI 등 최신 AI 툴을 활용해 자료 요약, 문서 초안 작성, 프로토타입 기획을 효율화합니다.
+              </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="group bg-white p-7 rounded-2xl border border-forest/10 shadow-card hover:border-forest/30 transition-all">
+              <div class="w-11 h-11 rounded-xl bg-sand flex items-center justify-center text-forest mb-5 group-hover:bg-forest group-hover:text-cream transition-colors">
+                <i data-lucide="clapperboard" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-lg font-bold text-forest mb-2">디지털 콘텐츠 제작 & 스토리텔링</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                짧은 시간 안에 진심을 전하는 영상 스크립트 기획부터 시각적 무드를 살린 에디토리얼 기록까지 콘텐츠로 소통합니다.
+              </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="group bg-white p-7 rounded-2xl border border-forest/10 shadow-card hover:border-forest/30 transition-all">
+              <div class="w-11 h-11 rounded-xl bg-sand flex items-center justify-center text-forest mb-5 group-hover:bg-forest group-hover:text-cream transition-colors">
+                <i data-lucide="book-open-check" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-lg font-bold text-forest mb-2">실무 역량 & 자기계발</h3>
+              <p class="text-sm text-muted leading-relaxed">
+                데이터 활용을 위한 컴퓨터활용능력 1급 및 한국사능력검정시험 1급 등 실무와 공공 분야 진출을 위한 기본기를 다지고 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Projects & Activities -->
+      <section id="projects" class="py-24 border-t border-forest/10 bg-sand/40">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="fade-up flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+            <div>
+              <p class="font-serif italic text-blush text-sm font-medium mb-1">2026 Archive</p>
+              <h2 class="text-2xl sm:text-3xl font-bold text-forest tracking-tight">프로젝트 및 활동 기록</h2>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="inline-flex p-1 rounded-full bg-white border border-forest/10 self-start">
+              <button data-filter="all" class="filter-btn active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-forest text-cream transition-all">전체</button>
+              <button data-filter="plan" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-muted hover:text-forest transition-all">기획·AI</button>
+              <button data-filter="campus" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold text-muted hover:text-forest transition-all">교내·문화</button>
+            </div>
+          </div>
+
+          <div id="project-list" class="fade-up space-y-4">
+            <!-- Item 1 -->
+            <article data-category="plan" class="project-card bg-white p-6 sm:p-7 rounded-2xl border border-forest/10 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md bg-blushSoft text-blush text-[11px] font-bold">웹 서비스 기획</span>
+                  <span class="text-xs text-muted">2026. 11</span>
+                </div>
+                <h3 class="text-lg font-bold text-forest">유아(3~5세) 대상 그림자 맞추기 인터랙티브 웹 앱 기획</h3>
+                <p class="text-sm text-muted">동물·공룡·바다생물 3가지 테마와 직관적인 실루엣 디자인을 적용한 유아 인지 발달용 웹 애플리케이션 기획 및 프로토타이핑</p>
+              </div>
+              <div class="shrink-0">
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-forest bg-sand px-3 py-1.5 rounded-full">UI/UX 기획</span>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article data-category="plan" class="project-card bg-white p-6 sm:p-7 rounded-2xl border border-forest/10 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md bg-forest/10 text-forest text-[11px] font-bold">AI & 교육</span>
+                  <span class="text-xs text-muted">2026. 08 – 11</span>
+                </div>
+                <h3 class="text-lg font-bold text-forest">전북대학교 AIX-PBL 성과공유회 & AI 툴 세미나 참여</h3>
+                <p class="text-sm text-muted">생성형 AI를 활용한 문제해결형 학습(PBL) 사례를 탐구하고, 대학 글쓰기 및 디지털콘텐츠제작 전공 과목에 AI 워크플로우 적용</p>
+              </div>
+              <div class="shrink-0">
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-forest bg-sand px-3 py-1.5 rounded-full">AI 활용</span>
+              </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article data-category="campus" class="project-card bg-white p-6 sm:p-7 rounded-2xl border border-forest/10 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md bg-blushSoft text-blush text-[11px] font-bold">콘텐츠 스크립트</span>
+                  <span class="text-xs text-muted">2026. 11</span>
+                </div>
+                <h3 class="text-lg font-bold text-forest">‘찬란’ 행사 13초 영상 편지 내레이션 기획 및 작성</h3>
+                <p class="text-sm text-muted">선배 및 팀원들과 함께한 협업의 보람과 따뜻한 유대감을 압축된 13초 분량의 감성적인 영상 메시지로 구성</p>
+              </div>
+              <div class="shrink-0">
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-forest bg-sand px-3 py-1.5 rounded-full">카피라이팅</span>
+              </div>
+            </article>
+
+            <!-- Item 4 -->
+            <article data-category="campus" class="project-card bg-white p-6 sm:p-7 rounded-2xl border border-forest/10 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2.5 py-0.5 rounded-md bg-forest/10 text-forest text-[11px] font-bold">인문·문화</span>
+                  <span class="text-xs text-muted">2026. 08 – 09</span>
+                </div>
+                <h3 class="text-lg font-bold text-forest">전북대 중앙도서관 작가 초청 특강 (김초엽 작가 · 박준 시인)</h3>
+                <p class="text-sm text-muted">SF 문학과 서정시를 넘나드는 창작자들의 시선을 접하며 타인에 대한 공감과 언어의 힘을 기른 인문 아카이빙</p>
+              </div>
+              <div class="shrink-0">
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-forest bg-sand px-3 py-1.5 rounded-full">인문 탐구</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Contact & Guestbook -->
+      <section id="contact" class="py-24 border-t border-forest/10">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="fade-up grid grid-cols-1 md:grid-cols-12 gap-12">
+            
+            <!-- Contact Info -->
+            <div class="md:col-span-5 space-y-6">
+              <div>
+                <p class="font-serif italic text-blush text-sm font-medium mb-1">Get in Touch</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-forest tracking-tight">함께 이야기를 나누고 싶다면</h2>
+              </div>
+
+              <p class="text-sm sm:text-base text-muted leading-relaxed">
+                프로젝트 협업, 학술 교류, 혹은 가벼운 응원 인사까지 언제든 환영합니다. 아래 이메일을 클릭해 복사하거나 오른쪽 방명록에 짧은 메시지를 남겨주세요.
+              </p>
+
+              <div class="pt-2 space-y-3">
+                <button id="copy-email-btn" type="button" class="w-full flex items-center justify-between px-4 py-3.5 rounded-xl bg-white border border-forest/15 hover:border-forest transition-all text-left group">
+                  <div class="flex items-center gap-3">
+                    <i data-lucide="mail" class="w-4 h-4 text-blush"></i>
+                    <span class="text-sm font-medium text-forest" id="email-text">harim.noh@jbnu.ac.kr</span>
+                  </div>
+                  <span class="text-xs font-semibold text-muted group-hover:text-forest flex items-center gap-1">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> 복사
+                  </span>
+                </button>
+
+                <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-sand/70 text-xs text-muted">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-forest shrink-0"></i>
+                  <span>전북특별자치도 전주시 덕진구 백제대로 567 전북대학교</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Guestbook -->
+            <div class="md:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-forest/10 shadow-editorial">
+              <h3 class="text-base font-bold text-forest mb-4 flex items-center gap-2">
+                <i data-lucide="message-square-heart" class="w-4 h-4 text-blush"></i>
+                방명록 남기기
+              </h3>
+
+              <form id="guestbook-form" class="space-y-3 mb-6">
+                <div class="flex flex-col sm:flex-row gap-2.5">
+                  <input id="guest-name" type="text" required maxlength="20" placeholder="이름 또는 닉네임" class="sm:w-1/3 px-3.5 py-2.5 rounded-xl bg-cream border border-forest/15 text-sm focus:outline-none focus:border-forest" />
+                  <input id="guest-msg" type="text" required maxlength="100" placeholder="하림 님에게 전하고 싶은 한마디를 남겨주세요!" class="sm:w-2/3 px-3.5 py-2.5 rounded-xl bg-cream border border-forest/15 text-sm focus:outline-none focus:border-forest" />
+                </div>
+                <div class="flex justify-end">
+                  <button type="submit" class="px-5 py-2 rounded-full bg-forest text-cream text-xs font-semibold hover:bg-forestLight transition-colors">
+                    메시지 등록하기
+                  </button>
+                </div>
+              </form>
+
+              <!-- Guestbook Entries -->
+              <div id="guestbook-list" class="space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                <div class="p-3.5 rounded-xl bg-cream border border-forest/5">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold text-forest">선물안지윤</span>
+                    <span class="text-[11px] text-muted">2026. 11</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-ink/85">하림 선배님 랜딩페이지 너무 깔끔하고 멋져요! 앞으로의 활동도 응원합니다 ✨</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-cream border border-forest/5">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold text-forest">행정학과 동기</span>
+                    <span class="text-[11px] text-muted">2026. 11</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-ink/85">디지털콘텐츠제작이랑 AI 활용하는 모습 항상 멋있어! 화이팅!</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 7. Footer -->
+    <footer class="border-t border-forest/10 py-8 bg-cream">
+      <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
+        <p>© 2026 Noh Harim. All rights reserved.</p>
+        <p class="font-serif italic">Designed with clarity & warmth.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 pointer-events-none transition-all duration-300 bg-forest text-cream text-xs font-medium px-5 py-3 rounded-full shadow-lg flex items-center gap-2 z-50">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-blush"></i>
+    <span id="toast-text">이메일 주소가 클립보드에 복사되었습니다!</span>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Scroll Fade-Up Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Project Category Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-forest', 'text-cream');
+          b.classList.add('text-muted');
+        });
+        btn.classList.add('bg-forest', 'text-cream');
+        btn.classList.remove('text-muted');
+
+        const filter = btn.dataset.filter;
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Toast Helper
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    let toastTimer;
+
+    function showToast(message) {
+      toastText.textContent = message;
+      toast.classList.remove('translate-y-12', 'opacity-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-12', 'opacity-0');
+      }, 2500);
+    }
+
+    // Copy Email
+    document.getElementById('copy-email-btn').addEventListener('click', () => {
+      const email = document.getElementById('email-text').textContent;
+      navigator.clipboard.writeText(email).then(() => {
+        showToast('이메일 주소가 클립보드에 복사되었습니다!');
+      }).catch(() => {
+        showToast('이메일: ' + email);
+      });
+    });
+
+    // Guestbook Form
+    const guestForm = document.getElementById('guestbook-form');
+    const guestList = document.getElementById('guestbook-list');
+
+    guestForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById('guest-name');
+      const msgInput = document.getElementById('guest-msg');
+      const name = nameInput.value.trim();
+      const msg = msgInput.value.trim();
+
+      if (!name || !msg) return;
+
+      const item = document.createElement('div');
+      item.className = 'p-3.5 rounded-xl bg-blushSoft/50 border border-blush/20 transition-all';
+      
+      const header = document.createElement('div');
+      header.className = 'flex items-center justify-between mb-1';
+      
+      const authorSpan = document.createElement('span');
+      authorSpan.className = 'text-xs font-bold text-forest';
+      authorSpan.textContent = name;
+
+      const dateSpan = document.createElement('span');
+      dateSpan.className = 'text-[11px] text-blush font-medium';
+      dateSpan.textContent = '방금 전';
+
+      const bodyP = document.createElement('p');
+      bodyP.className = 'text-xs sm:text-sm text-ink/90';
+      bodyP.textContent = msg;
+
+      header.appendChild(authorSpan);
+      header.appendChild(dateSpan);
+      item.appendChild(header);
+      item.appendChild(bodyP);
+
+      guestList.prepend(item);
+      nameInput.value = '';
+      msgInput.value = '';
+      showToast('소중한 방명록이 등록되었습니다!');
+    });
+  </script>
+</body>
+</html>
